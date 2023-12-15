@@ -23,6 +23,12 @@ class Stock(Asset):
         self.company = company
         self.ticker = ticker
 
+    def __str__(self):
+        return f"{self.ticker}: {self.company} -- ${self.price}"
+    
+    def __gt__(self, second: object) -> bool:
+        return self.price > second.price
+
 
 class Bond(Asset):
     def __init__(self, price, description, duration, yieldamt):
@@ -31,7 +37,12 @@ class Bond(Asset):
         self.duration = duration
         self.yieldamt = yieldamt
 
+    def __str__(self):
+        return f"{self.description}: {self.duration}yr : {self.price} : {self.yieldamt}%"
 
+    def __gt__(self, second: object) -> bool:
+        return self.yieldamt > second.yieldamt
+    
 # ~~~~~~~~~ TEST CODE ~~~~~~~~~
 stocks = [
     Stock("MSFT", 342.0, "Microsoft Corp"),
